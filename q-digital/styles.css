@@ -6,6 +6,11 @@ body {
     font-family: "Montserrat", sans-serif;
 }
 
+a {
+    text-decoration: none;
+    color: #333;
+}
+
 section {
     margin-top: 100px;
 }
@@ -27,19 +32,19 @@ section {
     background: url("./assets/images/promo.png") no-repeat center;
 }
 
-.nav {
+.header__nav {
     margin-bottom: 100px;
     display: flex;
     justify-content: space-between;
 }
 
-.nav__title {
+.header__title {
     margin: 50px 0 0 0;
     text-transform: uppercase;
     font-size: 20px;
 }
 
-.nav__form {
+.header__form {
     margin: 50px 0 0 0;
 }
 
@@ -120,6 +125,7 @@ section {
 }
 
 .partners__name {
+    margin: 0 0 18px 0;
     color: #333;
     font-size: 14px;
 }
@@ -168,4 +174,46 @@ section {
 
 .searchPartners__button {
     padding: 15px 15px;
+}
+
+.footer {
+    margin-top: 100px;
+    border-top: 3px solid #ff4e50;
+}
+
+.footer__content {
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer__title {
+    margin-top: 40px;
+    color: #ff4e50;
+    text-transform: uppercase;
+    font-size: 16px;
+}
+
+.footer__list {
+    margin: 20px 0 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.footer__listItem {
+    padding-bottom: 10px;
+    color: #666;
+}
+
+.footer__item {
+    font-size: 14px;
+}
+
+.footer__subTitle {
+    margin: 40px 0 0 0;
+}
+
+.footer__image {
+    width: 110px;
+    height: 40px;
+    margin-top: 40px;
 }
