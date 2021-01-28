@@ -147,6 +147,7 @@ section {
 
 .ideas__item {
     position: relative;
+    margin-bottom: 20px;
 }
 
 .ideas__title {
