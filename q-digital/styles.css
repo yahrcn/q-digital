@@ -6,6 +6,10 @@ body {
     font-family: "Montserrat", sans-serif;
 }
 
+section {
+    margin-top: 100px;
+}
+
 .container {
     max-width: 940px;
     margin-right: auto;
@@ -13,6 +17,7 @@ body {
 }
 
 .subtext {
+    color: #666;
     font-family: "Roboto", sans-serif;
     font-weight: 300;
 }
@@ -56,16 +61,13 @@ body {
 
 .promo__subtext {
     margin: 0;
+    color: #fff;
     font-size: 24px;
 }
 
 .promo__button {
     margin: 40px 0;
     padding: 15px 20px;
-}
-
-.main {
-    margin-top: 100px;
 }
 
 .sectionTitle {
@@ -95,11 +97,38 @@ body {
 }
 
 .howWorks__subtext {
-    margin-left: 18px;
+    padding: 0 18px;
     font-size: 14px;
 }
 
 .howWorks__step {
     margin-left: 18px;
     order: -2;
+}
+
+.partners {
+    text-align: center;
+}
+
+.partners__content {
+    display: flex;
+    justify-content: space-between;
+}
+
+.partners__item {
+    width: 220px;
+}
+
+.partners__name {
+    color: #333;
+    font-size: 14px;
+}
+
+.partners__subtext {
+    font-size: 14px;
+}
+
+.partners__button {
+    margin-top: 40px;
+    padding: 15px 10px;
 }
