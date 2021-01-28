@@ -132,3 +132,40 @@ section {
     margin-top: 40px;
     padding: 15px 10px;
 }
+
+.ideas__content {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.ideas__item {
+    position: relative;
+}
+
+.ideas__title {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 22px;
+}
+
+.searchPartners {
+    text-align: center;
+}
+
+.searchPartners__form {
+    margin-top: 40px;
+}
+
+.searchPartners__input {
+    width: 240px;
+    padding: 15px 10px;
+    margin-right: 15px;
+}
+
+.searchPartners__button {
+    padding: 15px 15px;
+}
