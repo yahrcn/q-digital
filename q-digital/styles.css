@@ -74,3 +74,32 @@ body {
     font-size: 22px;
     color: #333;
 }
+
+.howWorks__content {
+    display: flex;
+    justify-content: space-between;
+}
+
+.howWorks__item {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 300px;
+    height: 400px;
+    background-color: #333;
+}
+
+.howWorks__title {
+    margin: 20px 0 20px 18px;
+    font-size: 24px;
+}
+
+.howWorks__subtext {
+    margin-left: 18px;
+    font-size: 14px;
+}
+
+.howWorks__step {
+    margin-left: 18px;
+    order: -2;
+}
