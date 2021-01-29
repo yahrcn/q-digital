@@ -208,6 +208,11 @@ section {
     position: relative;
     margin-bottom: 20px;
     max-width: 100%;
+    border-radius: 5px;
+}
+
+.ideas__img {
+    height: 310px;
 }
 
 .ideas__title {
@@ -305,7 +310,130 @@ section {
         margin-bottom: 60px;
     }
 
+    .ideas__item {
+        width: 31.5%;
+    }
+
+    .ideas__item:nth-child(5),
+    .ideas__item:nth-child(6) {
+        width: 66%;
+    }
+
     .ideas__img {
-        max-width: 79%;
+        max-width: 100%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .container {
+        max-width: 300px;
+    }
+
+    section {
+        margin-top: 40px;
+    }
+
+    .sectionTitle {
+        margin: 0;
+        margin-bottom: 20px;
+    }
+
+    .header__nav {
+        margin: 0;
+        flex-flow: column;
+        text-align: center;
+    }
+
+    .header__title {
+        margin-top: 115px;
+        order: 2;
+    }
+
+    .promo__title {
+        font-size: 30px;
+    }
+
+    .promo__subtext {
+        font-style: 18px;
+    }
+
+    .howWorks__content {
+        flex-flow: column;
+    }
+
+    .howWorks__item {
+        width: 100%;
+    }
+
+    .howWorks__item:not(:last-child) {
+        margin-bottom: 10px;
+    }
+
+    .partners__item:first-child,
+    .partners__item:first-child + .partners__item {
+        margin-bottom: 0;
+    }
+
+    .ideas__content {
+        flex-flow: column nowrap;
+    }
+
+    .ideas__item {
+        width: 100%;
+        height: 120px;
+        overflow: hidden;
+    }
+
+    .ideas__item:nth-child(5),
+    .ideas__item:nth-child(6) {
+        width: 100%;
+    }
+
+    .ideas__img {
+        max-width: 100%;
+        object-fit: none;
+    }
+
+    .searchPartners__form {
+        margin-top: 20px;
+    }
+
+    .searchPartners__input {
+        margin: 0;
+        width: 250px;
+    }
+
+    .searchPartners__button {
+        margin-top: 10px;
+        width: 280px;
+    }
+
+    .footer__content {
+        text-align: center;
+        flex-flow: column;
+    }
+
+    .footer__title {
+        margin-top: 20px;
+    }
+
+    .footer__subTitle {
+        margin: 0;
+    }
+
+    .footer__list {
+        margin: 0 0 20px 0;
+    }
+
+    .footer__listItem {
+        display: inline;
+    }
+
+    .footer__listItem:not(:last-child) {
+        margin-right: 15px;
+    }
+
+    .footer__image {
+        margin: 20px auto 0 auto;
     }
 }
