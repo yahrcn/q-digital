@@ -6,6 +6,10 @@ body {
     font-family: "Montserrat", sans-serif;
 }
 
+button {
+    font-family: "Montserrat", sans-serif;
+}
+
 a {
     text-decoration: none;
     color: #333;
@@ -48,6 +52,26 @@ section {
     margin: 50px 0 0 0;
 }
 
+.header__logIn {
+    margin-right: 15px;
+    background: none;
+    border: none;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    color: #fff;
+}
+
+.header__signUp {
+    padding: 10px 15px;
+    background: none;
+    border: 2px solid #fff;
+    border-radius: 25px;
+    cursor: pointer;
+    color: #fff;
+    font-weight: 700;
+}
+
 .promo {
     margin: 0 auto;
     max-width: 500px;
@@ -72,7 +96,16 @@ section {
 
 .promo__button {
     margin: 40px 0;
-    padding: 15px 20px;
+}
+
+.button-filled {
+    padding: 10px 25px;
+    background-color: #ff4e50;
+    border: none;
+    border-radius: 25px;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
 }
 
 .sectionTitle {
@@ -93,22 +126,42 @@ section {
     justify-content: flex-end;
     width: 300px;
     height: 400px;
-    background-color: #333;
 }
 
 .howWorks__title {
-    margin: 20px 0 20px 18px;
+    margin: 20px 0 15px 18px;
     font-size: 24px;
 }
 
 .howWorks__subtext {
+    margin: 0 0 20px;
     padding: 0 18px;
+    color: #ccc;
     font-size: 14px;
 }
 
 .howWorks__step {
+    width: 40px;
+    padding: 5px 15px;
     margin-left: 18px;
+    border-radius: 15px;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
     order: -2;
+    background-color: #ff4e50;
+}
+
+.step1 {
+    background: url(./assets/images/step1.png);
+}
+
+.step2 {
+    background: url(./assets/images/step2.png);
+}
+
+.step3 {
+    background: url(./assets/images/step3.png);
 }
 
 .partners {
@@ -136,7 +189,13 @@ section {
 
 .partners__button {
     margin-top: 40px;
-    padding: 15px 10px;
+    padding: 10px 28px;
+    color: #ff4e50;
+    font-weight: 700;
+    background: none;
+    border-radius: 20px;
+    border: 2px solid#ff4e50;
+    cursor: pointer;
 }
 
 .ideas__content {
@@ -168,13 +227,11 @@ section {
 }
 
 .searchPartners__input {
-    width: 240px;
-    padding: 15px 10px;
+    width: 210px;
+    padding: 10px 15px;
     margin-right: 15px;
-}
-
-.searchPartners__button {
-    padding: 15px 15px;
+    border: 1px solid #ccc;
+    font-family: "Roboto", sans-serif;
 }
 
 .footer {
