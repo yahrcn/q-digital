@@ -1,4 +1,27 @@
-li.checked {
-    background: rgb(218, 218, 218);
-    color: blue;
+.books {
+    width: 250px;
+    margin: 0 auto;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+legend {
+    background-color: rgb(145, 145, 145);
+}
+
+li {
+    background-color: rgb(209, 209, 209);
+    margin: 3px 0;
+}
+
+.addForm {
+    display: flex;
+    justify-content: center;
+    flex-flow: column wrap;
+    margin: 0 auto;
+    max-width: 250px;
+}
+
+.addBtn {
+    order: 6;
 }

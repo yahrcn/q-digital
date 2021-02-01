@@ -1,73 +1,69 @@
 window.onload = function () {
-    var list = document.getElementById("task-list");
-
-    var todos;
-
-    function toLocal() {
-        todos = list.innerHTML;
-        localStorage.setItem("todos", todos);
-    }
-
-    list.addEventListener(
-        "click",
-        function (ev) {
-            if (ev.target.tagName === "INPUT") {
-                ev.target.parentNode.classList.toggle("checked");
-                //ev.target.classList.toggle("checked");
-            } else if (ev.target.tagName === "BUTTON") {
-                let div = ev.target.parentNode;
-                div.remove();
-                toLocal();
-            }
-        },
-        false
-    );
-    document
-        .getElementById("addBtn")
-        .addEventListener("click", newElement, false);
-
-    function newElement() {
+    console.log(localStorage);
+    radioChange();
+    for (let i = 0; i < localStorage.length; i++) {
         let li = document.createElement("li");
-        let inputValue = document.getElementById("task-input").value;
-        let t = document.createTextNode(inputValue);
-        li.appendChild(t);
-        if (inputValue == "") {
-            alert("Введите ваше дело!");
-        } else {
-            document.getElementById("task-list").appendChild(li);
-        }
-        document.getElementById("task-input").value = "";
-        let checkbox = document.createElement("INPUT");
-        checkbox.type = "checkbox";
-        let deleteBtn = document.createElement("BUTTON");
-        deleteBtn.innerHTML = "Удалить";
-        li.appendChild(checkbox);
-        li.appendChild(deleteBtn);
-        toLocal();
+        let key = localStorage.key(i);
+        li.innerHTML = key;
+        bookList.appendChild(li);
     }
-    document.getElementById("clearAll").addEventListener("click", clearAll);
+};
 
-    function clearAll() {
-        let list = document.getElementById("task-list");
-        list.innerHTML = "";
-        toLocal();
+var optionText = document.getElementById("radioText");
+var optionFile = document.getElementById("radioFile");
+var form = document.getElementById("addForm");
+var bookList = document.getElementById("bookList");
+var textarea = document.createElement("textarea");
+var input = document.createElement("input");
+var title = document.getElementById("bookTitle");
+var books;
+
+function toLocal(book, text) {
+    books = bookList.innerHTML;
+    localStorage.setItem(book, text);
+}
+
+const radioChange = () => {
+    if (optionText.checked) {
+        textarea.cols = 20;
+        textarea.rows = 8;
+        textarea.style.resize = "none";
+        textarea.name = "bookText";
+        textarea.required = "true";
+        form.removeChild(form.lastChild);
+        form.appendChild(textarea);
+    } else if (optionFile.checked) {
+        input.type = "file";
+        input.name = "file";
+        input.required = "true";
+        input.accept = "text/plain";
+        form.removeChild(form.lastChild);
+        form.appendChild(input);
     }
-    document.getElementById("allDone").addEventListener("click", checkedAll);
-
-    var add = true;
-    function checkedAll() {
-        var li = document.querySelectorAll("li");
-        for (var i = 0; i < li.length; i++) {
-            li[i].classList[add ? "add" : "remove"]("checked");
-            if (add) li[i].firstElementChild.checked = "checked";
-            else li[i].firstElementChild.checked = "";
-        }
-        add = !add;
-
-        toLocal();
-    }
-
-    if (localStorage.getItem("todos")) {
-        list.innerHTML = localStorage.getItem("todos");
+};
+const addBook = () => {
+    if (optionText.checked) {
+        let li = document.createElement("li");
+        li.innerHTML = title.value;
+        bookList.appendChild(li);
+        toLocal(title.value, textarea.value);
+    } else if (optionFile.checked) {
+        const formData = new FormData();
+        formData.append("login", title.value);
+        formData.append("file", document.querySelector("[type=file]").files[0]);
+        fetch("https://apiinterns.osora.ru/", {
+            method: "POST",
+            body: formData,
+        })
+            .then((response) => response.json())
+            .then((result) => {
+                console.log(result);
+                if (result.status) {
+                    let li = document.createElement("li");
+                    li.innerHTML = title.value;
+                    bookList.appendChild(li);
+                }
+                toLocal(title.value, result.text);
+            });
     }
 };

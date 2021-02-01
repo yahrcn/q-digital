@@ -12,21 +12,46 @@
     </head>
 
     <body>
-        <form onsubmit="">
-            <input type="text" name="" id="task-input" />
-            <input type="submit" value="Добавить" id="addBtn" />
-            <input type="button" value="Очистить" id="clearAll" />
+        <ul class="fav"></ul>
+        <ul class="books" id="bookList">
+            <legend>Список книг</legend>
+        </ul>
+        <form onsubmit="event.preventDefault()" id="addForm" class="addForm">
+            <legend>Добавить книгу</legend>
+            <label for="radioText">
+                <input
+                    type="radio"
+                    name="type"
+                    value="text"
+                    id="radioText"
+                    checked
+                    onchange="radioChange()"
+                />
+                Написать самому
+            </label>
+            <label for="radioFile">
+                <input
+                    type="radio"
+                    name="type"
+                    value="file"
+                    id="radioFile"
+                    onchange="radioChange()"
+                />
+                Загрузить из файла
+            </label>
+
+            <label for="bookTitle">
+                Название
+                <br />
+                <input type="text" name="bookTitle" id="bookTitle" required />
+            </label>
             <input
-                type="button"
-                value="Отметить все как выполненные"
-                id="allDone"
+                type="submit"
+                value="Добавить"
+                class="addBtn"
+                onclick="addBook()"
             />
         </form>
-
-        <div id="tasks">
-            <ul id="task-list"></ul>
-        </div>
-
         <script src="script.js"></script>
     </body>
 </html>
