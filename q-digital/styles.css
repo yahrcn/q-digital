@@ -1,24 +1,55 @@
-.books {
-    width: 250px;
-    margin: 0 auto;
-    padding: 0;
-    margin-bottom: 20px;
-}
-
 legend {
+    padding: 2px 5px;
     background-color: rgb(145, 145, 145);
 }
 
+ul {
+    width: 250px;
+    padding: 0;
+    margin-bottom: 10px;
+    list-style: none;
+}
+
 li {
-    background-color: rgb(209, 209, 209);
     margin: 3px 0;
+    padding: 2px 7px;
+    background-color: rgb(238, 238, 238);
+}
+
+li.done {
+    background-color: rgb(100, 80, 80);
+}
+
+li:hover {
+    transform: translateX(5px);
+    cursor: pointer;
+}
+
+.books {
+    display: inline-block;
+}
+
+.openBook {
+    display: none;
+    width: 400px;
+}
+
+.openText {
+    padding: 2px 5px;
+}
+
+.openArea {
+    display: none;
+}
+
+.buttons {
+    margin-top: 10px;
 }
 
 .addForm {
     display: flex;
     justify-content: center;
     flex-flow: column wrap;
-    margin: 0 auto;
     max-width: 250px;
 }
 

@@ -12,10 +12,28 @@
     </head>
 
     <body>
-        <ul class="fav"></ul>
+        <ul class="fav">
+            <legend>Мои любимые книги</legend>
+        </ul>
         <ul class="books" id="bookList">
             <legend>Список книг</legend>
         </ul>
+        <div class="openBook" id="openBook">
+            <legend id="openTitle"></legend>
+            <span id="openText" class="openText"></span>
+            <textarea
+                id="openArea"
+                class="openArea"
+                cols="30"
+                rows="10"
+                onblur="handleEditBlur()"
+            ></textarea>
+            <div class="buttons">
+                <button onclick="doneBook()">Прочитал</button>
+                <button onclick="editBook()">Ред.</button>
+                <button onclick="deleteBook()">X</button>
+            </div>
+        </div>
         <form onsubmit="event.preventDefault()" id="addForm" class="addForm">
             <legend>Добавить книгу</legend>
             <label for="radioText">
