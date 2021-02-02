@@ -1,13 +1,20 @@
 window.onload = function () {
     console.log(localStorage);
     radioChange();
-    for (let i = 0; i < localStorage.length; i++) {
-        console.log(i, localStorage.key(i));
+    for (let i = localStorage.length - 1; i >= 0; i--) {
         let li = document.createElement("li");
         let key = localStorage.key(i);
         li.innerHTML = key;
-        bookList.appendChild(li);
-        if (JSON.parse(localStorage.getItem(li.innerText)).status) {
+        li.setAttribute("draggable", true);
+        li.setAttribute("ondragstart", "onDragStart(event);");
+        li.setAttribute("ondragend", "onDragEnd(event);");
+        li.id = i;
+        if (JSON.parse(localStorage.getItem(li.innerText)).fav) {
+            favList.appendChild(li);
+        } else {
+            bookList.appendChild(li);
+        }
+        if (JSON.parse(localStorage.getItem(li.innerText)).done) {
             li.classList.add("done");
         }
         li.addEventListener(
@@ -18,9 +25,9 @@ window.onload = function () {
                 let openText = document.getElementById("openText");
                 let lis = document.getElementsByTagName("li");
                 for (let i = 0; i < lis.length; i++) {
-                    lis[i].id = "";
+                    lis[i].classList.remove("opened");
                 }
-                li.id = "opened";
+                li.classList.add("opened");
                 openTitle.innerText = li.innerText;
                 openText.innerText = JSON.parse(
                     localStorage.getItem(li.innerText)
@@ -36,50 +43,87 @@ var optionText = document.getElementById("radioText");
 var optionFile = document.getElementById("radioFile");
 var form = document.getElementById("addForm");
 var bookList = document.getElementById("bookList");
+var favList = document.getElementById("fav");
 var textarea = document.createElement("textarea");
 var input = document.createElement("input");
 var title = document.getElementById("bookTitle");
 
-function toLocal(book, bookText, bookStatus = false) {
+function toLocal(book, bookText, doneStatus = false, favStatus = false) {
     localStorage.setItem(
         book,
-        JSON.stringify({ text: bookText, status: bookStatus })
+        JSON.stringify({ text: bookText, done: doneStatus, fav: favStatus })
     );
 }
 
+function onDragStart(event) {
+    event.currentTarget.classList.add("inDrag");
+}
+
+function onDragEnd(event) {
+    event.currentTarget.classList.remove("inDrag");
+}
+
+function onDragOver(event) {
+    event.preventDefault();
+}
+
+function onDrop(event) {
+    const draggableElement = document.getElementsByClassName("inDrag")[0];
+    const dropzone = event.target;
+    if (dropzone.id == "fav" || dropzone.id == "bookList") {
+        dropzone.appendChild(draggableElement);
+        if (event.target.id == "fav") {
+            toLocal(
+                draggableElement.innerText,
+                JSON.parse(localStorage.getItem(draggableElement.innerText))
+                    .text,
+                JSON.parse(localStorage.getItem(draggableElement.innerText))
+                    .done,
+                true
+            );
+        } else {
+            toLocal(
+                draggableElement.innerText,
+                JSON.parse(localStorage.getItem(draggableElement.innerText))
+                    .text,
+                JSON.parse(localStorage.getItem(draggableElement.innerText))
+                    .done,
+                false
+            );
+        }
+    }
+}
+
 const radioChange = () => {
+    let bookText = document.getElementById("bookText");
+    let bookFile = document.getElementById("bookFile");
     if (optionText.checked) {
-        textarea.cols = 20;
-        textarea.rows = 8;
-        textarea.style.resize = "none";
-        textarea.name = "bookText";
-        textarea.required = "true";
-        form.removeChild(form.lastChild);
-        form.appendChild(textarea);
+        bookText.classList.add("active");
+        bookFile.classList.remove("active");
     } else if (optionFile.checked) {
-        input.type = "file";
-        input.name = "file";
-        input.required = "true";
-        input.accept = "text/plain";
-        form.removeChild(form.lastChild);
-        form.appendChild(input);
+        bookFile.classList.add("active");
+        bookText.classList.remove("active");
     }
 };
+
 const addBook = () => {
     let li = document.createElement("li");
+    li.setAttribute("draggable", true);
     li.addEventListener(
         "click",
         function () {
             let openDiv = document.getElementById("openBook");
             let openTitle = document.getElementById("openTitle");
             let openText = document.getElementById("openText");
-            let opened = document.getElementsByTagName("li");
-            for (let i = 0; i < opened.length; i++) {
-                opened[i].id = "";
+            let lis = document.getElementsByTagName("li");
+            for (let i = 0; i < lis.length; i++) {
+                lis[i].classList.remove("opened");
             }
-            li.id = "opened";
+            li.classList.add("opened");
             openTitle.innerText = li.innerText;
-            openText.innerText = localStorage.getItem(li.innerText);
+            openText.innerText = JSON.parse(
+                localStorage.getItem(li.innerText)
+            ).text;
             openDiv.style.display = "inline-block";
         },
         false
@@ -106,13 +150,12 @@ const addBook = () => {
                 toLocal(title.value, result.text);
             });
     }
-    console.log(localStorage);
 };
 
 const deleteBook = () => {
     let openDiv = document.getElementById("openBook");
     let title = document.getElementById("openTitle");
-    let li = document.getElementById("opened");
+    let li = document.getElementsByClassName("opened")[0];
     bookList.removeChild(li);
     localStorage.removeItem(title.innerText);
     openDiv.style.display = "none";
@@ -131,20 +174,36 @@ const handleEditBlur = () => {
     let span = document.getElementById("openText");
     let area = document.getElementById("openArea");
     let title = document.getElementById("openTitle").innerText;
-    toLocal(title, area.value);
+    toLocal(
+        title,
+        area.value,
+        JSON.parse(localStorage.getItem(title)).done,
+        JSON.parse(localStorage.getItem(title)).fav
+    );
     span.innerText = area.value;
     area.style.display = "none";
     span.style.display = "block";
 };
 
 const doneBook = () => {
+    console.log(localStorage);
     let title = document.getElementById("openTitle");
     let text = document.getElementById("openText");
-    let li = document.getElementById("opened");
-    if (JSON.parse(localStorage.getItem(li.innerText)).status) {
-        toLocal(title.innerText, text.innerText, false);
+    let li = document.getElementsByClassName("opened")[0];
+    if (JSON.parse(localStorage.getItem(li.innerText)).done) {
+        toLocal(
+            title.innerText,
+            text.innerText,
+            false,
+            JSON.parse(localStorage.getItem(li.innerText)).fav
+        );
     } else {
-        toLocal(title.innerText, text.innerText, true);
+        toLocal(
+            title.innerText,
+            text.innerText,
+            true,
+            JSON.parse(localStorage.getItem(li.innerText)).fav
+        );
     }
     li.innerText;
     li.classList.toggle("done");
