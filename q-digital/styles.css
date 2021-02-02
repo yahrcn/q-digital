@@ -82,3 +82,16 @@ li:hover {
 .active {
     display: block;
 }
+
+.bookFile {
+    display: none;
+}
+
+.bookText {
+    display: none;
+    resize: none;
+}
+
+.active {
+    display: block;
+}
