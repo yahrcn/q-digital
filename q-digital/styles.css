@@ -5,9 +5,11 @@ legend {
 
 ul {
     width: 250px;
+    margin: 0;
     padding: 0;
     margin-bottom: 10px;
     list-style: none;
+    padding-bottom: 30px;
 }
 
 li {
@@ -17,7 +19,7 @@ li {
 }
 
 li.done {
-    background-color: rgb(100, 80, 80);
+    background-color: rgb(182, 181, 114);
 }
 
 li:hover {
@@ -25,21 +27,36 @@ li:hover {
     cursor: pointer;
 }
 
-.books {
+.col {
+    height: 570px;
+    vertical-align: top;
     display: inline-block;
 }
 
 .openBook {
-    display: none;
     width: 400px;
+    height: 100%;
+    display: none;
+    vertical-align: top;
 }
 
 .openText {
+    display: block;
+    height: 89.1%;
     padding: 2px 5px;
+    margin: 3px 0;
+    overflow: scroll;
+    overflow-x: hidden;
 }
 
 .openArea {
     display: none;
+    height: 88.8%;
+    padding: 2px 5px;
+    margin: 3px 0;
+    overflow: scroll;
+    overflow-x: hidden;
+    resize: none;
 }
 
 .buttons {
@@ -53,6 +70,15 @@ li:hover {
     max-width: 250px;
 }
 
-.addBtn {
-    order: 6;
+.bookFile {
+    display: none;
+}
+
+.bookText {
+    display: none;
+    resize: none;
+}
+
+.active {
+    display: block;
 }
