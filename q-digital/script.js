@@ -1,14 +1,12 @@
 window.onload = function () {
     console.log(localStorage);
     radioChange();
+    // sortLocalStorage();
     for (let i = localStorage.length - 1; i >= 0; i--) {
         let li = document.createElement("li");
         let key = localStorage.key(i);
         li.innerHTML = key;
         li.setAttribute("draggable", true);
-        li.setAttribute("ondragstart", "onDragStart(event);");
-        li.setAttribute("ondragend", "onDragEnd(event);");
-        li.id = i;
         if (JSON.parse(localStorage.getItem(li.innerText)).fav) {
             favList.appendChild(li);
         } else {
@@ -17,50 +15,91 @@ window.onload = function () {
         if (JSON.parse(localStorage.getItem(li.innerText)).done) {
             li.classList.add("done");
         }
-        li.addEventListener(
+    }
+    for (let i = 0; i < lists.length; i++) {
+        lists[i].addEventListener(
             "click",
-            function () {
+            function (event) {
                 let openDiv = document.getElementById("openBook");
                 let openTitle = document.getElementById("openTitle");
                 let openText = document.getElementById("openText");
-                let lis = document.getElementsByTagName("li");
+                let li = event.target;
                 for (let i = 0; i < lis.length; i++) {
                     lis[i].classList.remove("opened");
+                    if (event.target == lis[i]) {
+                        openTitle.innerText = li.innerText;
+                        openText.innerText = JSON.parse(
+                            localStorage.getItem(li.innerText)
+                        ).text;
+                        openDiv.style.display = "inline-block";
+                    }
                 }
-                li.classList.add("opened");
-                openTitle.innerText = li.innerText;
-                openText.innerText = JSON.parse(
-                    localStorage.getItem(li.innerText)
-                ).text;
-                openDiv.style.display = "inline-block";
+                for (let i = 0; i < lis.length; i++) {
+                    if (li == lis[i]) {
+                        li.classList.add("opened");
+                    }
+                }
             },
             false
         );
     }
 };
 
+var lis = document.getElementsByTagName("li");
+var lists = document.getElementsByTagName("ul");
 var optionText = document.getElementById("radioText");
 var optionFile = document.getElementById("radioFile");
 var form = document.getElementById("addForm");
 var bookList = document.getElementById("bookList");
 var favList = document.getElementById("fav");
-var textarea = document.createElement("textarea");
+var textarea = document.getElementById("bookText");
 var input = document.createElement("input");
 var title = document.getElementById("bookTitle");
 
 function toLocal(book, bookText, doneStatus = false, favStatus = false) {
     localStorage.setItem(
-        book,
-        JSON.stringify({ text: bookText, done: doneStatus, fav: favStatus })
+        localStorage.length,
+        JSON.stringify({
+            title: book,
+            text: bookText,
+            done: doneStatus,
+            fav: favStatus,
+            time: new Date().getTime(),
+        })
     );
 }
 
+// function sortLocalStorage() {
+//     if (localStorage.length > 0) {
+//         var localStorageArray = [];
+//         for (i = 0; i < localStorage.length; i++) {
+//             let content = localStorage.getItem(i);
+//             localStorageArray.push(content);
+//         }
+//     }
+//     console.log(localStorageArray);
+//     var sortedArray = localStorageArray.sort(function (a, b) {
+//         if (JSON.parse(a).time > JSON.parse(b).time) {
+//             return 1;
+//         } else return -1;
+//     });
+//     console.log(sortedArray);
+// }
+
 function onDragStart(event) {
-    event.currentTarget.classList.add("inDrag");
+    for (let i = 0; i < lis.length; i++) {
+        if (event.target == lis[i]) {
+            event.target.classList.add("inDrag");
+        }
+    }
 }
 
 function onDragEnd(event) {
-    event.currentTarget.classList.remove("inDrag");
+    for (let i = 0; i < lis.length; i++) {
+        if (event.target == lis[i]) {
+            event.target.classList.remove("inDrag");
+        }
+    }
 }
 
 function onDragOver(event) {
@@ -70,7 +109,10 @@ function onDragOver(event) {
 function onDrop(event) {
     const draggableElement = document.getElementsByClassName("inDrag")[0];
     const dropzone = event.target;
-    if (dropzone.id == "fav" || dropzone.id == "bookList") {
+    if (
+        (dropzone.id == "fav" || dropzone.id == "bookList") &&
+        draggableElement != undefined
+    ) {
         dropzone.appendChild(draggableElement);
         if (event.target.id == "fav") {
             toLocal(
@@ -98,9 +140,13 @@ const radioChange = () => {
     let bookText = document.getElementById("bookText");
     let bookFile = document.getElementById("bookFile");
     if (optionText.checked) {
+        bookFile.toggleAttribute("required");
+        bookText.toggleAttribute("required");
         bookText.classList.add("active");
         bookFile.classList.remove("active");
     } else if (optionFile.checked) {
+        bookFile.toggleAttribute("required");
+        bookText.toggleAttribute("required");
         bookFile.classList.add("active");
         bookText.classList.remove("active");
     }
@@ -109,25 +155,6 @@ const radioChange = () => {
 const addBook = () => {
     let li = document.createElement("li");
     li.setAttribute("draggable", true);
-    li.addEventListener(
-        "click",
-        function () {
-            let openDiv = document.getElementById("openBook");
-            let openTitle = document.getElementById("openTitle");
-            let openText = document.getElementById("openText");
-            let lis = document.getElementsByTagName("li");
-            for (let i = 0; i < lis.length; i++) {
-                lis[i].classList.remove("opened");
-            }
-            li.classList.add("opened");
-            openTitle.innerText = li.innerText;
-            openText.innerText = JSON.parse(
-                localStorage.getItem(li.innerText)
-            ).text;
-            openDiv.style.display = "inline-block";
-        },
-        false
-    );
     if (optionText.checked) {
         li.innerHTML = title.value;
         bookList.appendChild(li);
@@ -156,7 +183,11 @@ const deleteBook = () => {
     let openDiv = document.getElementById("openBook");
     let title = document.getElementById("openTitle");
     let li = document.getElementsByClassName("opened")[0];
-    bookList.removeChild(li);
+    if (JSON.parse(localStorage.getItem(title.innerText)).fav) {
+        favList.removeChild(li);
+    } else {
+        bookList.removeChild(li);
+    }
     localStorage.removeItem(title.innerText);
     openDiv.style.display = "none";
 };
@@ -186,7 +217,6 @@ const handleEditBlur = () => {
 };
 
 const doneBook = () => {
-    console.log(localStorage);
     let title = document.getElementById("openTitle");
     let text = document.getElementById("openText");
     let li = document.getElementsByClassName("opened")[0];
