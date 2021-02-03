@@ -178,7 +178,7 @@ section {
 }
 
 .partners__name {
-    margin: 0 0 18px 0;
+    margin: 8px 0 13px 0;
     color: #333;
     font-size: 14px;
 }
@@ -330,12 +330,21 @@ section {
     }
 
     section {
-        margin-top: 40px;
+        margin-top: 35px;
+    }
+
+    section:last-child {
+        margin: 0;
+        margin-top: 24px;
     }
 
     .sectionTitle {
         margin: 0;
-        margin-bottom: 20px;
+        margin-bottom: 13px;
+    }
+
+    .header {
+        height: 540px;
     }
 
     .header__nav {
@@ -344,17 +353,39 @@ section {
         text-align: center;
     }
 
+    .header__form {
+        margin-top: 17px;
+    }
+
+    .header__logIn {
+        margin-right: 12px;
+    }
+
+    .header__signUp {
+        margin-right: 12px;
+    }
+
     .header__title {
         margin-top: 115px;
         order: 2;
     }
 
+    .promo {
+        width: 276px;
+    }
+
     .promo__title {
+        margin: 0.83em 0 0.3em 0;
         font-size: 30px;
     }
 
+    .promo__button {
+        margin: 13px 0;
+        padding: 13px 50px;
+    }
+
     .promo__subtext {
-        font-style: 18px;
+        font-size: 18px;
     }
 
     .howWorks__content {
@@ -363,6 +394,15 @@ section {
 
     .howWorks__item {
         width: 100%;
+        height: 240px;
+    }
+
+    .howWorks__title {
+        margin: 13px 0 12px 18px;
+    }
+
+    .howWorks__subtext {
+        margin: 0 0 15px;
     }
 
     .howWorks__item:not(:last-child) {
@@ -371,7 +411,44 @@ section {
 
     .partners__item:first-child,
     .partners__item:first-child + .partners__item {
-        margin-bottom: 0;
+        margin-bottom: 26px;
+    }
+
+    .partners__item {
+        margin-bottom: 26px;
+    }
+
+    .partners__item:first-child {
+        order: 1;
+    }
+
+    .partners__item:first-child + .partners__item {
+        order: 3;
+    }
+
+    .partners__item:first-child + .partners__item + .partners__item {
+        order: 2;
+    }
+
+    .partners__item:first-child
+        + .partners__item
+        + .partners__item
+        + .partners__item {
+        order: 4;
+    }
+
+    .partners__name {
+        margin: 7px 0 15px;
+    }
+
+    .partners__subtext {
+        width: 200px;
+        margin: 0 auto;
+    }
+
+    .partners__button {
+        margin-top: -2px;
+        padding: 10px 73px;
     }
 
     .ideas__content {
@@ -381,6 +458,7 @@ section {
     .ideas__item {
         width: 100%;
         height: 120px;
+        margin-bottom: 10px;
         overflow: hidden;
     }
 
@@ -395,7 +473,7 @@ section {
     }
 
     .searchPartners__form {
-        margin-top: 20px;
+        margin-top: 15px;
     }
 
     .searchPartners__input {
@@ -408,13 +486,21 @@ section {
         width: 280px;
     }
 
+    .searchSubtext {
+        font-size: 18px;
+    }
+
+    .footer {
+        margin-top: 43px;
+    }
+
     .footer__content {
         text-align: center;
         flex-flow: column;
     }
 
     .footer__title {
-        margin-top: 20px;
+        margin-top: 17px;
     }
 
     .footer__subTitle {
@@ -422,7 +508,7 @@ section {
     }
 
     .footer__list {
-        margin: 0 0 20px 0;
+        margin: 0 0 15px 0;
     }
 
     .footer__listItem {
