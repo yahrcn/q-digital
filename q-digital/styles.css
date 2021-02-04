@@ -16,7 +16,7 @@ a {
 }
 
 section {
-    margin-top: 100px;
+    margin-top: 95px;
 }
 
 .container {
@@ -37,19 +37,19 @@ section {
 }
 
 .header__nav {
-    margin-bottom: 100px;
+    margin-bottom: 110px;
     display: flex;
     justify-content: space-between;
 }
 
 .header__title {
-    margin: 50px 0 0 0;
+    margin: 45px 0 0 0;
     text-transform: uppercase;
     font-size: 20px;
 }
 
 .header__form {
-    margin: 50px 0 0 0;
+    margin: 35px 0 0 0;
 }
 
 .header__logIn {
@@ -82,7 +82,7 @@ section {
 }
 
 .promo__title {
-    margin: 32px 0;
+    margin: 32px 0 20px 0;
     letter-spacing: 0;
     font-size: 52px;
     text-transform: uppercase;
@@ -95,11 +95,11 @@ section {
 }
 
 .promo__button {
-    margin: 40px 0;
+    margin: 35px 0;
 }
 
 .button-filled {
-    padding: 10px 25px;
+    padding: 11px 25px;
     background-color: #ff4e50;
     border: none;
     border-radius: 25px;
@@ -109,7 +109,7 @@ section {
 }
 
 .sectionTitle {
-    margin-bottom: 40px;
+    margin-bottom: 33px;
     text-align: center;
     font-size: 22px;
     color: #333;
@@ -129,12 +129,12 @@ section {
 }
 
 .howWorks__title {
-    margin: 20px 0 15px 18px;
+    margin: 12px 0 15px 18px;
     font-size: 24px;
 }
 
 .howWorks__subtext {
-    margin: 0 0 20px;
+    margin: 0 0 15px 0;
     padding: 0 18px;
     color: #ccc;
     font-size: 14px;
@@ -188,7 +188,7 @@ section {
 }
 
 .partners__button {
-    margin-top: 40px;
+    margin-top: 20px;
     padding: 10px 28px;
     color: #ff4e50;
     font-weight: 700;
@@ -206,7 +206,7 @@ section {
 
 .ideas__item {
     position: relative;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
     max-width: 100%;
     border-radius: 5px;
 }
@@ -224,8 +224,14 @@ section {
     font-size: 22px;
 }
 
+.ideas__item:last-child,
+.ideas__item:nth-child(6) {
+    margin-bottom: 0;
+}
+
 .searchPartners {
     text-align: center;
+    margin-top: 90px;
 }
 
 .searchPartners__form {
@@ -235,7 +241,6 @@ section {
 .searchPartners__input {
     width: 210px;
     padding: 10px 15px;
-    margin-right: 15px;
     border: 1px solid #ccc;
     font-family: "Roboto", sans-serif;
 }
