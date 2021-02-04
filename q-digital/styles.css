@@ -272,6 +272,10 @@ section {
     font-size: 14px;
 }
 
+.footer__link {
+    font-size: 14px;
+}
+
 .footer__subTitle {
     margin: 40px 0 0 0;
 }
@@ -283,8 +287,24 @@ section {
 }
 
 @media screen and (max-width: 768px) {
+    section {
+        margin-top: 95px;
+    }
+
+    .sectionTitle {
+        margin-bottom: 33px;
+    }
+
     .container {
         max-width: 748px;
+    }
+
+    .header__title {
+        margin: 45px 0 0 0;
+    }
+
+    .header__form {
+        margin: 35px 0 0 0;
     }
 
     .header__nav {
@@ -292,8 +312,26 @@ section {
         margin-bottom: 100px;
     }
 
+    .promo__title {
+        margin: 40px 0 22px 0;
+    }
+
+    .promo__button {
+        margin: 33px 0;
+        padding: 13px 22px;
+    }
+
     .howWorks__item {
         width: 236px;
+    }
+
+    .howWorks__title {
+        margin-top: 12.6px;
+        margin-bottom: 13px;
+    }
+
+    .howWorks__subtext {
+        margin: 0 0 15px 0;
     }
 
     .partners__content {
@@ -307,11 +345,12 @@ section {
 
     .partners__item:first-child,
     .partners__item:first-child + .partners__item {
-        margin-bottom: 60px;
+        margin-bottom: 40px;
     }
 
     .ideas__item {
         width: 31.5%;
+        margin-bottom: 15px;
     }
 
     .ideas__item:nth-child(5),
@@ -319,8 +358,40 @@ section {
         width: 66%;
     }
 
+    .ideas__item:last-child,
+    .ideas__item:nth-child(6) {
+        margin-bottom: 0;
+    }
+
     .ideas__img {
         max-width: 100%;
+    }
+
+    .searchSubtext {
+        font-size: 18px;
+    }
+
+    .searchPartners__form {
+        margin-top: 35px;
+    }
+
+    .searchPartners__input {
+        margin-right: 0;
+    }
+
+    .footer__content {
+        margin: 0 30px;
+    }
+
+    .footer__title {
+        margin-top: 37px;
+    }
+    .footer__subTitle {
+        margin: 0;
+    }
+
+    .footer__item {
+        margin: 37px 0 5px 0;
     }
 }
 
@@ -484,10 +555,6 @@ section {
     .searchPartners__button {
         margin-top: 10px;
         width: 280px;
-    }
-
-    .searchSubtext {
-        font-size: 18px;
     }
 
     .footer {
