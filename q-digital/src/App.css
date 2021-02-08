@@ -1,0 +1,35 @@
+.auth {
+    display: flex;
+    justify-content: center;
+    flex-flow: column wrap;
+    align-items: center;
+    width: 250px;
+    margin: 0 auto;
+    background-color: aliceblue;
+}
+
+.auth legend {
+    padding-bottom: 10px;
+    font-size: 1.1em;
+    text-align: center;
+}
+
+.auth input {
+    margin-bottom: 15px;
+}
+
+.main {
+    display: block;
+    width: 250px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.math-test {
+    display: none;
+    width: 250px;
+    margin: 0 auto;
+    justify-content: center;
+    flex-flow: column wrap;
+    text-align: center;
+}
