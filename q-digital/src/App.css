@@ -33,3 +33,14 @@
     flex-flow: column wrap;
     text-align: center;
 }
+
+.result {
+    display: none;
+    width: 250px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.result .result__table {
+    margin: 0 auto;
+}

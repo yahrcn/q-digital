@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 
 import "../App.css";
 
-const SignUp = ({ history }) => {
-    const handleSubmit = (event) => {
+export default class SignUp extends React.Component {
+    handleSubmit(event) {
         event.preventDefault();
         const name = event.target[0].value;
         const email = event.target[1].value;
@@ -29,35 +29,37 @@ const SignUp = ({ history }) => {
                     if (!result.status) {
                         alert(result.errors.email);
                     } else {
-                        history.push("/log-in");
+                        this.props.history.push("/log-in");
                     }
                 });
         }
-    };
-
-    return (
-        <div className="container">
-            <form className="auth sign-up" onSubmit={handleSubmit}>
-                <legend>Регистрация</legend>
-                <label htmlFor="name">Введите имя:</label>
-                <input type="text" name="name" id="name" required />
-                <label htmlFor="email">Введите email:</label>
-                <input type="email" name="email" id="email" required />
-                <label htmlFor="pass">Введите пароль:</label>
-                <input type="password" name="pass" id="pass" required />
-                <label htmlFor="confirmPass">Подтвердите пароль:</label>
-                <input
-                    type="password"
-                    name="confirmPass"
-                    id="confirmPass"
-                    required
-                />
-                <button type="submit">Зарегистрироваться</button>
-                <span>Уже есть аккаунт?</span>
-                <Link to="/log-in">Авторизация</Link>
-            </form>
-        </div>
-    );
-};
-
-export default SignUp;
+    }
+    render() {
+        return (
+            <div className="container">
+                <form
+                    className="auth sign-up"
+                    onSubmit={this.handleSubmit.bind(this)}
+                >
+                    <legend>Регистрация</legend>
+                    <label htmlFor="name">Введите имя:</label>
+                    <input type="text" name="name" id="name" required />
+                    <label htmlFor="email">Введите email:</label>
+                    <input type="email" name="email" id="email" required />
+                    <label htmlFor="pass">Введите пароль:</label>
+                    <input type="password" name="pass" id="pass" required />
+                    <label htmlFor="confirmPass">Подтвердите пароль:</label>
+                    <input
+                        type="password"
+                        name="confirmPass"
+                        id="confirmPass"
+                        required
+                    />
+                    <button type="submit">Зарегистрироваться</button>
+                    <span>Уже есть аккаунт?</span>
+                    <Link to="/log-in">Авторизация</Link>
+                </form>
+            </div>
+        );
+    }
+}
