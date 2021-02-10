@@ -6,46 +6,39 @@ import "./App.css";
 import SignUp from "./components/SignUp";
 import LogIn from "./components/LogIn";
 import Main from "./components/Main";
+import Result from "./components/Result";
 
 class App extends React.Component {
     render() {
         const { history } = this.props;
-        if (localStorage.getItem("user")) {
-            const formData = new FormData();
-            formData.append(
-                "email",
-                JSON.parse(localStorage.getItem("user")).email
-            );
-            formData.append(
-                "password",
-                JSON.parse(localStorage.getItem("user")).password
-            );
-            fetch("https://internsapi.public.osora.ru/api/auth/login", {
-                method: "POST",
-                headers: {
-                    Authorization: `Bearer ${
-                        JSON.parse(localStorage.getItem("user")).token
-                    }`,
-                },
-                body: formData,
-            })
-                .then((res) => res.json())
-                .then((result) => {
-                    console.log(result);
-                });
+        if (
+            localStorage.getItem("user") &&
+            JSON.parse(localStorage.getItem("user")).questions
+        ) {
             return (
                 <div className="App">
                     <Switch>
                         <Route
                             history={history}
-                            path="/log-in"
-                            component={LogIn}
+                            path="/result"
+                            component={Result}
                         />
                         <Route
                             history={history}
-                            path="/sign-up"
-                            component={SignUp}
+                            path="/main"
+                            component={Main}
                         />
+                        <Redirect from="/" to="/main" />
+                    </Switch>
+                </div>
+            );
+        } else if (
+            localStorage.getItem("user") &&
+            !JSON.parse(localStorage.getItem("user")).questions
+        ) {
+            return (
+                <div className="App">
+                    <Switch>
                         <Route
                             history={history}
                             path="/main"

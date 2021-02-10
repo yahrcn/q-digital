@@ -57,17 +57,21 @@ export default class Main extends React.Component {
                     options: result.data.options,
                 });
 
-                document.getElementsByClassName("math-test")[0].style.display =
-                    "flex";
-                document.getElementsByClassName("main")[0].style.display =
-                    "none";
+                document
+                    .getElementsByClassName("math-test")[0]
+                    .classList.toggle("hidden");
+                document
+                    .getElementsByClassName("main")[0]
+                    .classList.toggle("hidden");
             });
     }
 
     handleBack() {
-        document.getElementsByClassName("result")[0].style.display = "none";
-        document.getElementsByClassName("math-test")[0].style.display = "none";
-        document.getElementsByClassName("main")[0].style.display = "block";
+        // document.getElementsByClassName("result")[0].style.display = "none";
+        document
+            .getElementsByClassName("math-test")[0]
+            .classList.toggle("hidden");
+        document.getElementsByClassName("main")[0].classList.toggle("hidden");
     }
 
     handleAnswer(event) {
@@ -98,14 +102,25 @@ export default class Main extends React.Component {
                         options: result.data.options,
                     });
                 } else {
-                    this.setState({
-                        questions: result.data.questions,
-                    });
-                    document.getElementsByClassName(
-                        "math-test"
-                    )[0].style.display = "none";
-                    document.getElementsByClassName("result")[0].style.display =
-                        "block";
+                    localStorage.setItem(
+                        "user",
+                        JSON.stringify({
+                            email: JSON.parse(localStorage.getItem("user"))
+                                .email,
+                            password: JSON.parse(localStorage.getItem("user"))
+                                .password,
+                            token: JSON.parse(localStorage.getItem("user"))
+                                .token,
+                            questions: result.data.questions,
+                            score: this.state.points,
+                        })
+                    );
+                    this.props.history.push("result");
+                    // document.getElementsByClassName(
+                    //     "math-test"
+                    // )[0].style.display = "none";
+                    // document.getElementsByClassName("result")[0].style.display =
+                    //     "block";
                 }
             });
     }
@@ -120,6 +135,7 @@ export default class Main extends React.Component {
                     <div className="main">
                         <form onSubmit={this.startTest.bind(this)}>
                             <select
+                                className="difficulty"
                                 onChange={(event) => {
                                     this.difficulty = event.target.value;
                                 }}
@@ -132,12 +148,15 @@ export default class Main extends React.Component {
                             </select>
                             <button type="submit">Start</button>
                         </form>
-                        <button onClick={this.handleLogOut.bind(this)}>
+                        <button
+                            className="back-btn"
+                            onClick={this.handleLogOut.bind(this)}
+                        >
                             Выход
                         </button>
                     </div>
 
-                    <div className="math-test">
+                    <div className="math-test hidden">
                         <form>
                             <div className="score">
                                 Score: {this.state.points}
@@ -148,48 +167,32 @@ export default class Main extends React.Component {
                             <div className="question">
                                 {this.state.question} = ?
                             </div>
-                            {this.state.options.length !== 0 ? (
-                                this.state.options.map((item, id) => {
-                                    return (
-                                        <button
-                                            key={id}
-                                            value={item}
-                                            onClick={this.handleAnswer.bind(
-                                                this
-                                            )}
-                                        >
-                                            {item}
-                                        </button>
-                                    );
-                                })
-                            ) : (
-                                <input onBlur={this.handleAnswer.bind(this)} />
-                            )}
+                            <div className="inputs">
+                                {this.state.options.length !== 0 ? (
+                                    this.state.options.map((item, id) => {
+                                        return (
+                                            <button
+                                                key={id}
+                                                value={item}
+                                                className="answer-btn"
+                                                onClick={this.handleAnswer.bind(
+                                                    this
+                                                )}
+                                            >
+                                                {item}
+                                            </button>
+                                        );
+                                    })
+                                ) : (
+                                    <input
+                                        onBlur={this.handleAnswer.bind(this)}
+                                    />
+                                )}
+                            </div>
                         </form>
-                        <button onClick={this.handleBack}>Go Back</button>
-                    </div>
-                    <div className="result">
-                        <div className="score">Score: {this.state.points}</div>
-                        <div className="end">END GAME</div>
-                        <table className="result__table">
-                            <tbody>
-                                <tr>
-                                    <th>Question</th>
-                                    <th>Answer</th>
-                                    <th>Correct</th>
-                                </tr>
-                                {this.state.questions.map((item, id) => {
-                                    return (
-                                        <tr key={id}>
-                                            <td>{item.question}</td>
-                                            <td>{item.current_answer}</td>
-                                            <td>{item.answer}</td>
-                                        </tr>
-                                    );
-                                })}
-                            </tbody>
-                        </table>
-                        <button onClick={this.handleBack}>Go Back</button>
+                        <button className="back-btn" onClick={this.handleBack}>
+                            Go Back
+                        </button>
                     </div>
                 </div>
             );

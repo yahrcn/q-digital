@@ -12,7 +12,6 @@ export default class LogIn extends React.Component {
         const formData = new FormData();
         formData.append("email", email);
         formData.append("password", password);
-        console.log(this);
 
         fetch("https://internsapi.public.osora.ru/api/auth/login", {
             method: "POST",
@@ -37,13 +36,11 @@ export default class LogIn extends React.Component {
     }
 
     render() {
-        const { history } = this.props;
         return (
             <div className="container">
                 <form
                     className="auth log-in"
                     onSubmit={this.handleLogIn.bind(this)}
-                    history={history}
                 >
                     <legend>Авторизация</legend>
                     <label htmlFor="email">Введите email:</label>

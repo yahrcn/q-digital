@@ -26,21 +26,87 @@
 }
 
 .math-test {
-    display: none;
+    display: flex;
     width: 250px;
     margin: 0 auto;
     justify-content: center;
     flex-flow: column wrap;
     text-align: center;
+    font-size: 1.3em;
+    text-transform: uppercase;
 }
 
 .result {
-    display: none;
     width: 250px;
     margin: 0 auto;
     text-align: center;
 }
 
-.result .result__table {
+.result__table {
     margin: 0 auto;
+    border-collapse: collapse;
+}
+
+.result__table th,
+td {
+    border-style: solid;
+    border-width: 0 0 1px 0;
+    border-color: black;
+}
+
+.result__table th:not(:last-child) {
+    padding-right: 10px;
+}
+
+.result__table tr {
+    height: 35px;
+}
+
+.result__table tr:not(:first-child):hover {
+    background-color: rgb(155, 195, 238);
+}
+
+.correct {
+    background-color: rgb(188, 211, 235);
+}
+
+.hidden {
+    display: none;
+}
+
+.difficulty {
+    padding: 7px;
+    border: 1px solid black;
+    background-color: lightyellow;
+}
+
+.back-btn {
+    margin-top: 5px;
+    padding: 7px 15px;
+}
+
+.math-test div {
+    margin-bottom: 15px;
+}
+
+.answer-btn {
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+}
+
+button {
+    border: 1px solid black;
+    background-color: lightyellow;
+    cursor: pointer;
+}
+
+button[type="submit"] {
+    padding: 7.8px 15px;
+    border: 1px solid black;
+    background-color: lightyellow;
+}
+
+button:hover {
+    background-color: rgb(255, 255, 189);
 }
